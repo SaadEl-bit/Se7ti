@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — FieldScreen AI</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="navbar__brand">FieldScreen AI</span>
+    <ul class="navbar__links">
+      <li><a href="map.html">Carte</a></li>
+      <li><a href="upload.html">Ordonnance</a></li>
+      <li><a href="stock.html">Médicaments</a></li>
+      <li><a href="admin.html" class="active">Admin</a></li>
+      <li><a href="#" id="btn-logout">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="page-header"><h1>Administration</h1></div>
+
+    <div id="alert-container"></div>
+
+    <div class="card" style="margin-bottom:var(--spacing-md);">
+      <h2 style="font-size:1rem;margin-bottom:var(--spacing-sm);">Ajouter une pharmacie</h2>
+      <form id="form-pharmacy">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm);">
+          <div class="form-group">
+            <label>Nom</label>
+            <input class="form-control" type="text" id="ph-name" required />
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input class="form-control" type="tel" id="ph-phone" />
+          </div>
+          <div class="form-group">
+            <label>Adresse</label>
+            <input class="form-control" type="text" id="ph-address" />
+          </div>
+          <div class="form-group">
+            <label>Latitude</label>
+            <input class="form-control" type="number" step="any" id="ph-lat" required />
+          </div>
+          <div class="form-group">
+            <label>Longitude</label>
+            <input class="form-control" type="number" step="any" id="ph-lon" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary">Ajouter</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size:1rem;margin-bottom:var(--spacing-sm);">Gestion des gardes</h2>
+      <div id="garde-table">
+        <p style="color:var(--color-text-muted);font-size:0.9rem;">Chargement…</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>

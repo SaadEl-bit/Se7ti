@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FieldScreen AI v2</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <script src="/js/config.js"></script>
+  <script type="module">
+    import { isAuthenticated } from './js/auth.js';
+
+    (async () => {
+      const authenticated = await isAuthenticated();
+      window.location.href = authenticated ? 'pages/map.html' : 'pages/login.html';
+    })();
+  </script>
+  <div style="display:flex;align-items:center;justify-content:center;height:100vh;color:var(--color-text-muted);">
+    Chargement…
+  </div>
+</body>
+</html>

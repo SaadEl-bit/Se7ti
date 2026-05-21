@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carte — FieldScreen AI</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/map.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="navbar__brand">FieldScreen AI</span>
+    <ul class="navbar__links">
+      <li><a href="map.html" class="active">Carte</a></li>
+      <li><a href="upload.html">Ordonnance</a></li>
+      <li><a href="stock.html">Médicaments</a></li>
+      <li><a href="admin.html">Admin</a></li>
+      <li><a href="#" id="btn-logout">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <div class="map-layout">
+    <aside class="map-sidebar">
+      <div class="map-sidebar__header">
+        <div class="map-sidebar__title">Patients &amp; Pharmacies</div>
+        <input
+          type="search"
+          id="search-input"
+          class="form-control map-sidebar__search"
+          placeholder="Rechercher nom ou médicament…"
+        />
+        <div class="map-sidebar__filters">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="patients">Patients</button>
+          <button class="filter-btn" data-filter="pharmacies">Pharmacies</button>
+          <button class="filter-btn" data-filter="garde">Garde uniquement</button>
+        </div>
+      </div>
+      <div class="map-sidebar__results" id="sidebar-results">
+        <p style="color:var(--color-text-muted);font-size:0.85rem;padding:var(--spacing-sm);">Chargement…</p>
+      </div>
+    </aside>
+
+    <div id="map">
+      <div class="map-legend">
+        <div class="map-legend__title">Légende</div>
+        <div class="map-legend__item">
+          <span class="map-legend__dot map-legend__dot--patient"></span>Patient
+        </div>
+        <div class="map-legend__item">
+          <span class="map-legend__dot map-legend__dot--pharmacy"></span>Pharmacie
+        </div>
+        <div class="map-legend__item">
+          <span class="map-legend__dot map-legend__dot--garde"></span>De garde
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <script src="/js/config.js"></script>
+  <script type="module" src="../js/app.js"></script>
+</body>
+</html>

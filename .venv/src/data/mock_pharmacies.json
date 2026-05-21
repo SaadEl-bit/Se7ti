@@ -1,0 +1,52 @@
+[
+  {
+    "id": "a1000000-0000-0000-0000-000000000001",
+    "name": "Pharmacie Centrale Oujda",
+    "address": "25 Av. Mohammed V, Oujda",
+    "phone": "+212 636-000001",
+    "latitude": 34.686,
+    "longitude": -1.911,
+    "is_garde": true,
+    "garde_horaires": {"date": "2026-05-15", "debut": "08:00", "fin": "22:00"}
+  },
+  {
+    "id": "a1000000-0000-0000-0000-000000000002",
+    "name": "Pharmacie Al Amal",
+    "address": "12 Rue Berkane, Oujda",
+    "phone": "+212 636-000002",
+    "latitude": 34.679,
+    "longitude": -1.903,
+    "is_garde": false,
+    "garde_horaires": null
+  },
+  {
+    "id": "a1000000-0000-0000-0000-000000000003",
+    "name": "Pharmacie Ibn Sina",
+    "address": "7 Bd Hassan II, Oujda",
+    "phone": "+212 636-000003",
+    "latitude": 34.691,
+    "longitude": -1.920,
+    "is_garde": true,
+    "garde_horaires": {"date": "2026-05-15", "debut": "22:00", "fin": "08:00"}
+  },
+  {
+    "id": "a1000000-0000-0000-0000-000000000004",
+    "name": "Pharmacie Salam",
+    "address": "3 Av. Bir Anzarane, Oujda",
+    "phone": "+212 636-000004",
+    "latitude": 34.675,
+    "longitude": -1.898,
+    "is_garde": false,
+    "garde_horaires": null
+  },
+  {
+    "id": "a1000000-0000-0000-0000-000000000005",
+    "name": "Pharmacie Nour",
+    "address": "88 Rue Al Qods, Oujda",
+    "phone": "+212 636-000005",
+    "latitude": 34.682,
+    "longitude": -1.930,
+    "is_garde": false,
+    "garde_horaires": null
+  }
+]
