@@ -1,0 +1,66 @@
+[
+  {
+    "id": "b1000000-0000-0000-0000-000000000001",
+    "pseudo": "PatientA",
+    "email": "patient_a@example.com",
+    "phone": "+212 661-000001",
+    "latitude": 34.678,
+    "longitude": -1.905,
+    "pathologies": ["diabete_type2"],
+    "medicaments": [
+      {"id": "c1000000-0000-0000-0000-000000000001", "nom": "Metformine", "dosage": "500mg", "stock_restant": 15, "unite": "comprime"},
+      {"id": "c1000000-0000-0000-0000-000000000002", "nom": "Glibenclamide", "dosage": "5mg", "stock_restant": 4, "unite": "comprime"}
+    ]
+  },
+  {
+    "id": "b1000000-0000-0000-0000-000000000002",
+    "pseudo": "PatientB",
+    "email": "patient_b@example.com",
+    "phone": "+212 661-000002",
+    "latitude": 34.683,
+    "longitude": -1.908,
+    "pathologies": ["hta"],
+    "medicaments": [
+      {"id": "c1000000-0000-0000-0000-000000000003", "nom": "Amlodipine", "dosage": "10mg", "stock_restant": 20, "unite": "comprime"},
+      {"id": "c1000000-0000-0000-0000-000000000004", "nom": "Losartan", "dosage": "50mg", "stock_restant": 10, "unite": "comprime"}
+    ]
+  },
+  {
+    "id": "b1000000-0000-0000-0000-000000000003",
+    "pseudo": "PatientC",
+    "email": "patient_c@example.com",
+    "phone": "+212 661-000003",
+    "latitude": 34.671,
+    "longitude": -1.915,
+    "pathologies": ["diabete_type2", "hta"],
+    "medicaments": [
+      {"id": "c1000000-0000-0000-0000-000000000005", "nom": "Metformine", "dosage": "850mg", "stock_restant": 30, "unite": "comprime"},
+      {"id": "c1000000-0000-0000-0000-000000000006", "nom": "Enalapril", "dosage": "10mg", "stock_restant": 3, "unite": "comprime"}
+    ]
+  },
+  {
+    "id": "b1000000-0000-0000-0000-000000000004",
+    "pseudo": "PatientD",
+    "email": "patient_d@example.com",
+    "phone": "+212 661-000004",
+    "latitude": 34.692,
+    "longitude": -1.900,
+    "pathologies": ["asthme"],
+    "medicaments": [
+      {"id": "c1000000-0000-0000-0000-000000000007", "nom": "Salbutamol", "dosage": "100mcg", "stock_restant": 2, "unite": "bouffee"},
+      {"id": "c1000000-0000-0000-0000-000000000008", "nom": "Budesonide", "dosage": "200mcg", "stock_restant": 8, "unite": "bouffee"}
+    ]
+  },
+  {
+    "id": "b1000000-0000-0000-0000-000000000005",
+    "pseudo": "PatientE",
+    "email": "patient_e@example.com",
+    "phone": "+212 661-000005",
+    "latitude": 34.688,
+    "longitude": -1.922,
+    "pathologies": ["insuffisance_renale"],
+    "medicaments": [
+      {"id": "c1000000-0000-0000-0000-000000000009", "nom": "Furosemide", "dosage": "40mg", "stock_restant": 25, "unite": "comprime"}
+    ]
+  }
+]

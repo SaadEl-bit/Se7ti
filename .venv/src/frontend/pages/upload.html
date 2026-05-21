@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ordonnance — FieldScreen AI</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <style>
+    .upload-zone {
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius);
+      padding: var(--spacing-xl);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .upload-zone:hover,
+    .upload-zone.drag-over {
+      border-color: var(--color-primary);
+      background: #e8f0fe;
+    }
+    .upload-zone p { color: var(--color-text-muted); font-size: 0.9rem; }
+
+    /* Results */
+    .results-section { margin-top: var(--spacing-lg); }
+    .results-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    .results-header h2 { font-size: 1.1rem; margin: 0; }
+    .confidence-badge {
+      background: #d4edda; color: #155724;
+      border-radius: 999px;
+      padding: 2px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .confidence-badge.low { background:#fff3cd; color:#856404; }
+
+    .prescription-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    .meta-item { font-size: 0.88rem; }
+    .meta-item span { color: var(--color-text-muted); }
+
+    .med-table { width: 100%; border-collapse: collapse; margin-bottom: var(--spacing-md); }
+    .med-table th, .med-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+    }
+    .med-table th { font-weight: 700; color: var(--color-primary); font-size: 0.82rem; text-transform: uppercase; }
+    .med-table tr:last-child td { border-bottom: none; }
+
+    .matching-section { margin-top: var(--spacing-md); }
+    .matching-section h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: var(--spacing-sm); color: var(--color-primary); }
+    .matching-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f0fe;
+      color: var(--color-primary);
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 0.82rem;
+      margin: 3px;
+    }
+
+    .ocr-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      align-items: center;
+      background: #f4f6f9;
+      border-radius: var(--radius);
+      padding: var(--spacing-sm) var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      font-size: 0.82rem;
+    }
+    .ocr-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e8f0fe;
+      color: var(--color-primary);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .ocr-chip.tier-free  { background:#d4edda; color:#155724; }
+    .ocr-chip.tier-haiku { background:#fff3cd; color:#856404; }
+    .ocr-chip.tier-final { background:#f8d7da; color:#721c24; }
+
+    .ocr-bar-wrap {
+      flex: 1;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ocr-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--color-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .ocr-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .ocr-toggle { margin-top: var(--spacing-md); }
+    .ocr-raw {
+      background: #f4f6f9;
+      padding: var(--spacing-md);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: var(--spacing-sm);
+    }
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <span class="navbar__brand">FieldScreen AI</span>
+    <ul class="navbar__links">
+      <li><a href="map.html">Carte</a></li>
+      <li><a href="upload.html" class="active">Ordonnance</a></li>
+      <li><a href="stock.html">Médicaments</a></li>
+      <li><a href="admin.html">Admin</a></li>
+      <li><a href="#" id="btn-logout">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="page-header"><h1>Scanner une ordonnance</h1></div>
+
+    <div class="card">
+      <div id="alert-container"></div>
+
+      <div class="upload-zone" id="upload-zone">
+        <p>Glissez-déposez une image ici</p>
+        <p>ou</p>
+        <button class="btn btn--outline" id="btn-select-file">Choisir un fichier</button>
+        <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" style="display:none;" />
+      </div>
+
+      <div style="margin-top:var(--spacing-lg);text-align:center;">
+        <span style="color:var(--color-text-muted);font-size:0.85rem;">— ou saisie manuelle —</span>
+      </div>
+
+      <form id="form-manual" style="margin-top:var(--spacing-md);">
+        <div class="form-group">
+          <label for="manual-meds">Médicaments (un par ligne : Nom Dosage)</label>
+          <textarea class="form-control" id="manual-meds" rows="4" placeholder="Metformine 500mg&#10;Amlodipine 10mg"></textarea>
+        </div>
+        <button type="submit" class="btn btn--secondary">Analyser manuellement</button>
+      </form>
+    </div>
+
+    <div class="results-section card" id="results-section" style="display:none;margin-top:var(--spacing-md);">
+      <div class="results-header">
+        <h2>Résultats de l'analyse</h2>
+        <span class="confidence-badge" id="confidence-badge"></span>
+      </div>
+
+      <div class="ocr-meta" id="ocr-meta" style="display:none;">
+        <span id="ocr-model-chip" class="ocr-chip"></span>
+        <div class="ocr-bar-wrap">
+          <span style="color:var(--color-text-muted);white-space:nowrap;">OCR</span>
+          <div class="ocr-bar">
+            <div class="ocr-bar-fill" id="ocr-bar-fill" style="width:0%;background:var(--color-secondary);"></div>
+          </div>
+          <span id="ocr-pct" style="white-space:nowrap;min-width:34px;">0%</span>
+        </div>
+        <span id="ocr-attempts-chip" style="color:var(--color-text-muted);"></span>
+      </div>
+
+      <div class="prescription-meta" id="prescription-meta"></div>
+
+      <h3 style="font-size:0.9rem;font-weight:700;margin-bottom:var(--spacing-sm);color:var(--color-primary);">Médicaments extraits</h3>
+      <table class="med-table">
+        <thead>
+          <tr>
+            <th>Médicament</th>
+            <th>Dosage</th>
+            <th>Fréquence</th>
+            <th>Durée</th>
+            <th>Qté</th>
+          </tr>
+        </thead>
+        <tbody id="meds-tbody"></tbody>
+      </table>
+
+      <div class="matching-section" id="matching-section" style="display:none;">
+        <h3>Patients proches avec les mêmes médicaments</h3>
+        <div id="matching-pills"></div>
+      </div>
+
+      <div class="ocr-toggle">
+        <button class="btn btn--outline" id="btn-toggle-ocr" style="font-size:0.82rem;padding:0.3rem 0.75rem;">Voir le texte OCR brut</button>
+        <pre class="ocr-raw" id="ocr-raw" style="display:none;"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script type="module" src="../js/prescription.js"></script>
+</body>
+</html>

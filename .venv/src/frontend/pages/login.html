@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion — FieldScreen AI</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a6eb5 0%, #145a9a 100%);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      margin: var(--spacing-md);
+    }
+    .login-logo {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+    .login-logo h1 {
+      font-size: 1.6rem;
+      color: var(--color-primary);
+      font-weight: 800;
+    }
+    .login-logo p {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .login-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--color-border);
+    }
+    .login-tab {
+      flex: 1;
+      padding: var(--spacing-sm);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s;
+    }
+    .login-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      font-weight: 600;
+    }
+    .geo-row {
+      display: flex;
+      gap: var(--spacing-sm);
+      align-items: flex-end;
+    }
+    .geo-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    .btn--geo {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .geo-status {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="card login-card">
+      <div class="login-logo">
+        <h1>FieldScreen AI</h1>
+        <p>Réseau patients &amp; pharmacies — Oujda</p>
+      </div>
+
+      <div class="login-tabs">
+        <button class="login-tab active" id="tab-login">Connexion</button>
+        <button class="login-tab" id="tab-signup">Inscription</button>
+      </div>
+
+      <div id="alert-container"></div>
+
+      <form id="form-login">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input class="form-control" type="email" id="login-email" placeholder="vous@exemple.com" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Mot de passe</label>
+          <input class="form-control" type="password" id="login-password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%;">Se connecter</button>
+      </form>
+
+      <form id="form-signup" style="display:none;">
+        <div class="form-group">
+          <label for="signup-pseudo">Pseudo</label>
+          <input class="form-control" type="text" id="signup-pseudo" placeholder="MonPseudo" required />
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input class="form-control" type="email" id="signup-email" placeholder="vous@exemple.com" required />
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Mot de passe</label>
+          <input class="form-control" type="password" id="signup-password" placeholder="Min. 6 caractères" required minlength="6" />
+        </div>
+        <div class="form-group">
+          <label for="signup-phone">Téléphone (optionnel)</label>
+          <input class="form-control" type="tel" id="signup-phone" placeholder="+212 6XX-XXXXXX" />
+        </div>
+        <div class="form-group">
+          <label>Localisation</label>
+          <div class="geo-row">
+            <div class="form-group">
+              <input class="form-control" type="number" id="signup-lat" placeholder="Latitude" step="any" required />
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="number" id="signup-lon" placeholder="Longitude" step="any" required />
+            </div>
+            <button type="button" class="btn btn--outline btn--geo" id="btn-geolocate">📍 Localiser</button>
+          </div>
+          <div class="geo-status" id="geo-status"></div>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%;margin-top:var(--spacing-sm);">Créer un compte</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>
